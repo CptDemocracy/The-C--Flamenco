@@ -42,7 +42,7 @@ int main(void) {
     vector<long> values;
     long value = 0L;
 
-    cout << "Please enter integer numbers you would like sorted: " << endl;
+    cout << "Please enter integer numbers you would like sorted (\"q\" to quit): " << endl;
     while (true) {
         try {
             getline(cin, input);
