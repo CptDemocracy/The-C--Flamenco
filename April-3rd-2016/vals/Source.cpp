@@ -11,8 +11,6 @@
 #include <memory>
 #include <string>
 
-#include <crtdbg.h>
-
 using std::cout;
 using std::endl;
 using std::cin;
@@ -25,9 +23,7 @@ using std::runtime_error;
 bool tryParseLong(const char* cstr, long* OutResult);
 
 int main(void) {
-
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+    
     const char* INPUT_DELIMS = " ";
     const string INPUT_INVALID_MSG = "Input invalid.";
 
