@@ -41,9 +41,10 @@ int main(void){
 
     cout << "Please enter the number of miles you would like to convert to km." << endl;
     while (true) {
-
-		cin >> input;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
+        cin >> input;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
         if (!tryParseDouble(input.c_str(), &miles)) {
             cerr << "Input invalid." << endl;
             continue;
