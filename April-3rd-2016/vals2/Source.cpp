@@ -37,7 +37,7 @@ int main(void) {
     double product =  0.0;
     double ratio = 0.0;
 
-    cout << "Please enter two integer numbers: ";
+    cout << "Please enter two floating point numbers: ";
 
     while (1) {
         getline(cin, input);        
