@@ -22,9 +22,9 @@ using std::cin;
 
 using std::strtod;
 using std::string;
+using std::streamsize;
 using std::runtime_error;
 using std::numeric_limits;
-using std::streamsize;
 
 bool tryParseDouble(const char* cstr, double* OutResult);
 
