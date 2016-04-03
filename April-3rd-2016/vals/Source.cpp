@@ -40,76 +40,84 @@ int main(void) {
 
     cout << "Please enter two integer numbers: ";
 
-    while (1) {
-        getline(cin, input);        
-
-        // reserve an extra byte for the null terminating char
-        // we will need this buffer to tokenize user input for validation
-        unique_ptr<char> buffer((char*)calloc(input.length() + 1, sizeof(char)));
-
-        // tokenize input, remember, we need to parse
-        // two numbers on one line
-        strcpy(buffer.get(), input.c_str());
-
-        char* token = nullptr;
-        token = strtok(buffer.get(), INPUT_DELIMS);
-
-        // if not a number, prompt again
-        if (!token || !tryParseLong(token, &val1)) {
-            cout << INPUT_INVALID_MSG << endl;
-            continue;
-        }
-
-        token = strtok(NULL, INPUT_DELIMS);
-
-        // if not a number, prompt again
-        if (!token || !tryParseLong(token, &val2)) {
-            cout << INPUT_INVALID_MSG << endl;
-            continue;
-        }
-        
-        // if there is any trailing irrelevant input
-        // token will NOT be a nullptr, - signal an error
-        token = strtok(NULL, INPUT_DELIMS);
-        if (token) {
-            cout << INPUT_INVALID_MSG << endl;
-            continue;
-        }
-        
-        cout << "val1 = " << val1 << endl 
-             << "val2 = " << val2 << endl;
-
-        if (val1 == val2) {
-            smallest = val1;
-            largest = val1;
-            cout << "val1 and val2 are both equal." << endl;
-        }
-
-        if (val1 < val2) {
-            smallest = val1;
-            largest = val2;
-        }
-        else if (val1 > val2) {
-            smallest = val2;
-            largest = val1;
-        }
-        cout << "smallest = " << smallest << endl
-             << "largest  = " << largest  << endl;
-
-        sum = val1 + val2;
-        cout << "sum = " << sum << endl;
-
-        difference = val1 - val2;
-        cout << "difference = " << difference << endl;
-
-        product = val1 * val2;
-        cout << "product = " << product << endl;
-
-        ratio = val1 / static_cast<double>(val2);
-        cout << "ratio = " << ratio << endl;
-
-        break;
-    }    
+    try {
+        while (1) {
+            getline(cin, input);        
+    
+            // reserve an extra byte for the null terminating char
+            // we will need this buffer to tokenize user input for validation
+            unique_ptr<char> buffer((char*)calloc(input.length() + 1, sizeof(char)));
+            if (buffer.get() == nullptr) {
+                throw runtime_error("Out of memory.");
+            }
+    
+            // tokenize input, remember, we need to parse
+            // two numbers on one line
+            strcpy(buffer.get(), input.c_str());
+    
+            char* token = nullptr;
+            token = strtok(buffer.get(), INPUT_DELIMS);
+    
+            // if not a number, prompt again
+            if (!token || !tryParseLong(token, &val1)) {
+                cout << INPUT_INVALID_MSG << endl;
+                continue;
+            }
+    
+            token = strtok(NULL, INPUT_DELIMS);
+    
+            // if not a number, prompt again
+            if (!token || !tryParseLong(token, &val2)) {
+                cout << INPUT_INVALID_MSG << endl;
+                continue;
+            }
+            
+            // if there is any trailing irrelevant input
+            // token will NOT be a nullptr, - signal an error
+            token = strtok(NULL, INPUT_DELIMS);
+            if (token) {
+                cout << INPUT_INVALID_MSG << endl;
+                continue;
+            }
+            
+            cout << "val1 = " << val1 << endl 
+                 << "val2 = " << val2 << endl;
+    
+            if (val1 == val2) {
+                smallest = val1;
+                largest = val1;
+                cout << "val1 and val2 are both equal." << endl;
+            }
+    
+            if (val1 < val2) {
+                smallest = val1;
+                largest = val2;
+            }
+            else if (val1 > val2) {
+                smallest = val2;
+                largest = val1;
+            }
+            cout << "smallest = " << smallest << endl
+                 << "largest  = " << largest  << endl;
+    
+            sum = val1 + val2;
+            cout << "sum = " << sum << endl;
+    
+            difference = val1 - val2;
+            cout << "difference = " << difference << endl;
+    
+            product = val1 * val2;
+            cout << "product = " << product << endl;
+    
+            ratio = val1 / static_cast<double>(val2);
+            cout << "ratio = " << ratio << endl;
+    
+            break;
+        } 
+    } catch (const runtime_error& e) {
+        cout << e.what() << endl;
+        abort();
+    }
     cin.get();
 
     return 0;
