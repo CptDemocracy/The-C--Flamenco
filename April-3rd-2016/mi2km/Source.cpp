@@ -60,7 +60,11 @@ bool tryParseDouble(const char* cstr, double* OutResult) {
     if (cstr == nullptr) {
         throw runtime_error("cstr cannot be a nullptr");
     }
-
+    
+    if (OutResult == nullptr) {
+        throw runtime_error("OutResult cannot be a nullptr");
+    }
+    
     // skip whitespace at the end of the cstring
     const char* end = &cstr[0];
     while (*end) ++end;
