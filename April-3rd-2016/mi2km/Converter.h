@@ -1,13 +1,15 @@
 #ifndef CONVERTER_H
 #define CONVERTER_H
 
+typedef double (*ConverterFunctionPtr)(double);
+
 class Converter {
 private:
-    double (*_convFuncPtr)(double);
+	double (*_convFuncPtr)(double);
 public:
-    Converter(double(*convFuncPtr)(double));
-    virtual ~Converter();
-    double operator()(double) const;
+	Converter(ConverterFunctionPtr);
+	virtual ~Converter();
+	double operator()(double) const;
 };
 
 #endif /* CONVERTER_H */
