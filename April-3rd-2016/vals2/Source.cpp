@@ -23,8 +23,6 @@ bool tryParseDouble(const char* cstr, double* OutResult);
 
 int main(void) {
 
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
     const char* INPUT_DELIMS = " ";
     const string INPUT_INVALID_MSG = "Input invalid.";
 
