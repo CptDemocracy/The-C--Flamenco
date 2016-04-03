@@ -10,6 +10,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
+#include <cctype>
 #include <string>
 
 #include "Converter.h"
@@ -19,10 +20,11 @@ using std::endl;
 using std::cerr;
 using std::cin;
 
-using std::getline;
 using std::strtod;
 using std::string;
 using std::runtime_error;
+using std::numeric_limits;
+using std::streamsize;
 
 bool tryParseDouble(const char* cstr, double* OutResult);
 
@@ -40,8 +42,8 @@ int main(void){
     cout << "Please enter the number of miles you would like to convert to km." << endl;
     while (true) {
 
-        getline(cin, input);
-
+		cin >> input;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
         if (!tryParseDouble(input.c_str(), &miles)) {
             cerr << "Input invalid." << endl;
             continue;
@@ -65,9 +67,12 @@ bool tryParseDouble(const char* cstr, double* OutResult) {
         throw runtime_error("OutResult cannot be a nullptr");
     }
     
-    // skip whitespace at the end of the cstring
+    // locate the end of the string
     const char* end = &cstr[0];
     while (*end) ++end;
+    
+    // skip whitespace at the end of the cstring
+    while (end > cstr && isspace(*end)) --end;
 
     // parse
     double value = 0.0;
