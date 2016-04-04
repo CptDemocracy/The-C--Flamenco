@@ -1,9 +1,3 @@
-#include <iostream>
-#include <cctype>
-#include <memory>
-#include <string>
-#include <map>
-
 /*
     "Programming Principles" by B.Stroustrup
      p.86 Exercise 9
@@ -12,6 +6,12 @@
      "two" into digits, such as 0 and 2. Then the user inputs a number, the
      program should print out the corresponding digit.
 */
+
+#include <iostream>
+#include <cctype>
+#include <memory>
+#include <string>
+#include <map>
 
 using std::unique_ptr;
 using std::getline;
