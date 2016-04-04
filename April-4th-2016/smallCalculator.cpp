@@ -91,7 +91,7 @@ int main(void) {
                 --pEnd;
             }
 
-            auto exppair = mathOps.find(optor);
+            auto exppair = mathOps.find(string(pBegin));
             if (exppair != mathOps.end()) {
                 result = exppair->second(value1, value2);
             }
