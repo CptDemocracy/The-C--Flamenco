@@ -100,6 +100,7 @@ int main(void) {
             
         } catch (const domain_error&) {
             cerr << "Domain error has occured during calculation." << endl;
+            continue;
         } catch (const invalid_argument&) {
             cerr << "Please enter an operator followed by two values." << endl;
             continue;
