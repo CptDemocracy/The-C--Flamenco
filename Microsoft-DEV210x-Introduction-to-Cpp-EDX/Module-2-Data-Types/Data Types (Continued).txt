@@ -1,0 +1,31 @@
+QUESTION----------------------------------------------------------
+
+In this first response, please paste your code that implements an 
+array. Your array should follow these guidelines:
+
+Store int data types
+Store 10 values
+Have an appropriate name
+Be initialized in the declaration statement
+
+RESPONSE----------------------------------------------------------
+
+int array[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+QUESTION----------------------------------------------------------
+
+In this second response, please paste your code that implements an 
+enumeration. Your enumeration should follow these guidelines:
+
+Store the months of the year
+Start the first element as 1 rather than 0
+Use an appropriate name
+
+RESPONSE----------------------------------------------------------
+
+enum Month {
+  January = 1,
+  February, March, April, May,
+  June, July, August, September,
+  October, November, December
+};
