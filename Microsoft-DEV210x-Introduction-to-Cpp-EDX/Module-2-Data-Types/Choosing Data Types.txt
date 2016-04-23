@@ -1,0 +1,178 @@
+QUESTION----------------------------------------------------------
+
+Choosing Data Types
+
+The data type chosen for your variables in a program should represent 
+the type of information that will be used. When choosing a data type, 
+such as int or string, careful consideration is required to ensure your 
+application will handle the data entered by a user with the following 
+aspects in mind:
+
+Range - specifically for numeric values
+Format- numeric or character data for zip/postal codes as an example
+Internationalization - consideration for character set support
+
+Using these considerations, select what you feel are the appropriate 
+data types for the following:
+
+First Name
+Street Address
+Birth Date
+Zip/Postal Code
+Bank Account Balance
+Months of the Year
+
+Enter your selected data types for these along with rationale for why 
+you chose them.
+
+Evaluate at least 2 of your peers providing feedback on their choices.
+
+This is an opportunity to explore and learn more about data types and 
+isn't a right vs wrong peer assessment. Participation means you get 
+points for this assessment.
+
+RESPONSE----------------------------------------------------------
+
+First Name: std::string
+
+RATIONALE:
+
+String class is used to represent the strings of characters. Prior to 
+C++, in C we would use either a null-terminated character array or in
+some cases char*, however the latter would place our firstName variable 
+into a read-only section of memory, rendering it immutable. String class 
+also offers an interface which in turn adds to flexibility. A point to 
+note however, in some cases we would have to use a char array (also known 
+as a C-string), that would be the case when dealing with legacy C functions 
+accepting C-strings as their argument. Using the c_str() method of the String
+class could add to the overhead, so using a C-string could potentially improve 
+performance in such cases.
+
+Street Address: std::string
+
+RATIONALE:
+
+While I'm a proponent of creating a class representing the address, whose 
+prototype I'll show in a few moments, the non-OOP approach would, in my opinion, 
+be using the String class. However, same issues pointed out in the section 
+"First Name RATIONALE" apply, i.e. c-strings.
+
+One more thing to add, all member variables were declared as strings for a reason.
+
+/* Address class declaration */
+using std::string;
+
+class Address {
+private:
+  string _country;
+  string _state;
+  string _city;
+  string _street;
+  string _houseNumber;
+  string _zip;
+public:
+  Address(string country, string state, string city,
+  string street, string houseNumber, string zip);
+  
+  string getCountry() const;
+  string getState() const;
+  string getCity() const;
+  string getStreet() const;
+  string getHouseNumber() const;
+  string getZip() const;
+};
+
+/* End of Address class declaration */
+
+And if we live in an apartment, well, we could just use inheritance:
+
+/* ApartmentAddress class declaration */
+
+using std::string;
+
+class ApartmentAddress : public Address {
+private:
+  string _apartmentNumber;
+public:
+  ApartmentAddress(string country, string state, string city,
+  string street, string houseNumber, string zip, string apartmentNumber);
+  string getApartmentNumber() const;
+};
+
+/* End of ApartmentAddress class declaration */
+
+Birth Date: int[]
+
+RATIONALE:
+
+A non-OOP approach would be using an integer array. Why not a string? 
+The reason for it is flexibility. Was birthDate of type String, sorting 
+entries, say, by the day, month, or year of birth would require parsing 
+to integers, and that in turn would add too much overhead.
+
+Example:
+
+int birthDate[] = { 1, 1, 1900 };
+
+A simple OOP approach, which would be most favorable in this case, in my 
+opinion, would be using a class like this:
+
+using std::string;
+
+class Date {
+public:
+  int day;
+  string month;
+  int year;
+}
+
+A yet better approach would be creating an enum for months, like this:
+
+enum Month {
+  January, February, March, 
+  April, May, June, 
+  July, August, September, 
+  October, November, December
+};
+
+class Date {
+private:
+  int day	= 1;
+  Month month = January;
+  int year	= 1900;
+
+public:	
+  Date(int day, Month month, int year) {	
+    this->day = day;
+    this->month = month;
+    this->year = year;
+  }
+};
+
+Zip/Postal Code: std::string
+
+RATIONALE:
+
+Zip could indeed be represented by an int, however, in some states, notably 
+in Canada, a postal code may contain letters.
+
+Bank Account Balance: double
+
+RATIONALE:
+
+Bank account balance can both be negative and positive, as well as have 
+fractional parts, hence the double.
+
+Months of the Year: enum
+
+RATIONALE:
+
+No strings here! Using a string would create inconsistency and remove much 
+desired flexibility. You could see an example of a Month enum implementation below:
+
+enum Month {
+  January, February, March, 
+  April, May, June, 
+  July, August, September, 
+  October, November, December
+};
