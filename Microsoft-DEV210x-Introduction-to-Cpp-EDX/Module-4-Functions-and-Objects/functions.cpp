@@ -1,5 +1,6 @@
 /*
 QUESTION----------------------------------------------------------
+
 In the previous module, you created a for loop to calculate a base 
 raised to an exponent. In this peer review, you are going to put that 
 code into a function and create two more functions. Paste your code 
@@ -15,13 +16,17 @@ exponent value. If it is 0, then immediately return 1 otherwise
 calculate the power and return the result.
 Show sample code that will call the function and get the result.
 
-For the second function you will compute the sine of an angle. Your function should accept the opposite and hypotenuse lengths and return the sine value. The formula for sine is:
+For the second function you will compute the sine of an angle. Your 
+function should accept the opposite and hypotenuse lengths and return 
+the sine value. The formula for sine is:
 
 sin = opposite / hypotenuse
 
 where / is used to denote division
 
-Ensure that you paste the code for the function as well as the code that calls the function and assigns the value to a variable.
+Ensure that you paste the code for the function as well as the code that 
+calls the function and assigns the value to a variable.
+
 RESPONSE----------------------------------------------------------
 */
 
