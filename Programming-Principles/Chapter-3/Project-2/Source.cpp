@@ -34,10 +34,15 @@ int main(const int argc, const char *argv[])
         static_cast<void>(std::cout << "Please enter the number of miles to convert to kilometers: ");
 
         while ( !(std::cin >> miles)) {
+            /* Make sure we clear the error flag first before "ignoring" the rest of invalid input. 
+             * Trying to "ignore" the trailing input before clearing the error flag will result in
+             * infinite loop.
+             */
             static_cast<void>(std::cin.clear());
             static_cast<void>(std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'));
             static_cast<void>(std::cerr << "Input invalid. Please try again." << std::endl);
         }
+        /* Get rid of the trailing whitespace characters */
         static_cast<void>(std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'));
     
         km = MilesToKilometers(miles);
