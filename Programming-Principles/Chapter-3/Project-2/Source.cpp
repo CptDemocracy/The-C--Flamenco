@@ -47,7 +47,7 @@ int main(const int argc, const char *argv[])
         static_cast<void>(std::cout << "Please press Enter to continue...");
         static_cast<void>(std::cin.get());
     }
-	  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 
 namespace {
