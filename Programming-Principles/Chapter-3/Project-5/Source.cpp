@@ -67,5 +67,5 @@ int main(const int argc, const char *argv[])
         }
         static_cast<void>(std::cout << std::endl << std::endl);
     }
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
