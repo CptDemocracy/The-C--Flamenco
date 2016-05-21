@@ -33,12 +33,10 @@ int main(const int argc, const char *argv[])
     /* String that will serve as a separator during output */
     const std::string SEPARATOR { ", " };
     
-    /* We could initialize the vector to the capacity of INPUT_VALUE_COUNT
-     * which would save us performance overhead, however, doing this would
-     * cause difficulties sanitizing the information with std::vector<T>::
-     * clear(void), which would shrink the vector.
+    /* Initialize the vector to the capacity of INPUT_VALUE_COUNT
+     * to save us performance overhead.
      */
-    std::vector<int> userInputVector { };
+    std::vector<int> userInputVector(INPUT_VALUE_COUNT);
     
     /* Temporary storage for user input values */
     int value { 0 };
@@ -63,7 +61,7 @@ int main(const int argc, const char *argv[])
                 /* This will cause a runtime error if the vector was not initialized 
                  * to capacity of INPUT_VALUE_COUNT 
                  */
-                userInputVector.push_back(value);
+                userInputVector[i] = value;
                 ++i;
             }
         }
@@ -85,12 +83,15 @@ int main(const int argc, const char *argv[])
             }
         }
         static_cast<void>(std::cout << std::endl);
-        
-        /* Sanitize data */
-        userInputVector.clear();
-        
         static_cast<void>(std::cout << "Please press Enter to continue...");
         static_cast<void>(std::cin.get());
+        
+        /* Sanitizing data. Please keep in mind that std::vector<T>::clear(void)
+         * would be unacceptable for this operation, since it shrinks the vector's
+         * capacity and we heavily rely on vector to be initialized to the capacity
+         * of INPUT_VALUE_COUNT.
+         */
+         userInputVector.assign(INPUT_VALUE_COUNT, 0);
         
         /* Guard against trailing input that might be entered before pressing the Enter key */
         static_cast<void>(std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'));
