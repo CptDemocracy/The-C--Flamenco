@@ -52,7 +52,7 @@ int main(const int argc, const char *argv[])
 
         std::sort(userInputVector.begin(), userInputVector.end());
 
-        std::size_t userInputVectorSize = userInputVector.size();
+        std::size_t userInputVectorSize { userInputVector.size() };
         for (std::size_t i = 0U; i < userInputVectorSize; ++i) {
             static_cast<void>(std::cout << userInputVector[i]);
             if (i != userInputVectorSize - 1U) {
