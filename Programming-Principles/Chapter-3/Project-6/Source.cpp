@@ -27,11 +27,20 @@
 
 int main(const int argc, const char *argv[]) 
 {
+    /* The number of values user is expected to enter */
     constexpr int INPUT_VALUE_COUNT { 3 };
 
+    /* String that will serve as a separator during output */
     const std::string SEPARATOR { ", " };
-
-    std::vector<int> userInputVector(INPUT_VALUE_COUNT);
+    
+    /* We could initialize the vector to the capacity of INPUT_VALUE_COUNT
+     * which would save us performance overhead, however, doing this would
+     * cause difficulties sanitizing the information with std::vector<T>::
+     * clear(void), which would shrink the vector.
+     */
+    std::vector<int> userInputVector { };
+    
+    /* Temporary storage for user input values */
     int value { 0 };
 
     while (true)
@@ -40,15 +49,25 @@ int main(const int argc, const char *argv[])
         int i { 0 };
         while (i < INPUT_VALUE_COUNT) {
             if ( !(std::cin >> value)) {
+                /* If user input was invalid. Clear the error flag and discard the trailing input.
+                 * It's important to clear the error flag first or else the program will be stuck
+                 * in an infinite loop.
+                 */
                 static_cast<void>(std::cin.clear());
                 static_cast<void>(std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'));
                 static_cast<void>(std::cerr << "Input invalid. Please retry." << std::endl);
+                
+                /* Make sure the counter is reset. */
                 i = 0;
             } else {
-                userInputVector[i] = value;
+                /* This will cause a runtime error if the vector was not initialized 
+                 * to capacity of INPUT_VALUE_COUNT 
+                 */
+                userInputVector.push_back(value);
                 ++i;
             }
         }
+        /* Discard trailing whitespace left in the std::istream by std::istream::operator>> */
         static_cast<void>(std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'));
 
         std::sort(userInputVector.begin(), userInputVector.end());
@@ -57,13 +76,24 @@ int main(const int argc, const char *argv[])
         for (std::size_t i = 0U; i < userInputVectorSize; ++i) {
             static_cast<void>(std::cout << userInputVector[i]);
             if (i != userInputVectorSize - 1) {
+                /* userInputVectorSize will never wrap around. In order for it to
+                 * actually wrap around, (userInputVectorSize == 0U) should hold.
+                 * However, if (userInputVectorSize == 0U) is true, this loop will
+                 * never execute.
+                 */
                 static_cast<void>(std::cout << SEPARATOR);
             }
         }
         static_cast<void>(std::cout << std::endl);
         
+        /* Sanitize data */
+        userInputVector.clear();
+        
         static_cast<void>(std::cout << "Please press Enter to continue...");
         static_cast<void>(std::cin.get());
+        
+        /* Guard against trailing input that might be entered before pressing the Enter key */
+        static_cast<void>(std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'));
     }
     return EXIT_SUCCESS;
 }
