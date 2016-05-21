@@ -71,9 +71,9 @@ int main(const int argc, const char *argv[])
         std::sort(userInputVector.begin(), userInputVector.end());
 
         std::size_t userInputVectorSize = userInputVector.size();
-        for (std::size_t i = 0U; i < userInputVectorSize; ++i) {
+        for (std::size_t i { 0U }; i < userInputVectorSize; ++i) {
             static_cast<void>(std::cout << userInputVector[i]);
-            if (i != userInputVectorSize - 1) {
+            if (i != userInputVectorSize - 1U) {
                 /* userInputVectorSize will never wrap around. In order for it to
                  * actually wrap around, (userInputVectorSize == 0U) should hold.
                  * However, if (userInputVectorSize == 0U) is true, this loop will
