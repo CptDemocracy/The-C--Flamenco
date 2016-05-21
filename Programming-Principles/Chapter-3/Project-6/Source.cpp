@@ -43,7 +43,7 @@ int main(const int argc, const char *argv[])
 
     while (true)
     {
-        static_cast<void>(std::cout << "Please enter " << INPUT_VALUE_COUNT << " integer values." << std::endl);
+        static_cast<void>(std::cout << "Please enter " << INPUT_VALUE_COUNT << " integer values:" << std::endl);
         int i { 0 };
         while (i < INPUT_VALUE_COUNT) {
             if ( !(std::cin >> value)) {
