@@ -13,11 +13,11 @@ void ModulusOperatorInterpreter::InterpretMathOperator(
     std::unique_ptr<MathOperator>& OutResult) const 
 {
     try {
-        MathOperator *ptr { nullptr };
         if (str == "%") {
-            ptr = new ModulusOperator { };
+            OutResult.reset(new ModulusOperator { });
+        } else {
+            OutResult.reset(nullptr);
         }
-        OutResult.reset(ptr);
     } catch (const std::bad_alloc&) {
         throw;
     }
