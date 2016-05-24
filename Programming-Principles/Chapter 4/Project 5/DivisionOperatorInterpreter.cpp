@@ -13,11 +13,11 @@ void DivisionOperatorInterpreter::InterpretMathOperator(
     std::unique_ptr<MathOperator>& OutResult) const 
 {
     try {
-        MathOperator *ptr { nullptr };
         if (str == "/") {
-            ptr = new DivisionOperator { };
+            OutResult.reset(new DivisionOperator { });
+        } else {
+            OutResult.reset(nullptr);
         }
-        OutResult.reset(ptr);
     } catch (const std::bad_alloc&) {
         throw;
     }
