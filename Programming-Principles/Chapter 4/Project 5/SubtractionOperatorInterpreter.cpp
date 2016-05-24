@@ -13,11 +13,11 @@ void SubtractionOperatorInterpreter::InterpretMathOperator(
     std::unique_ptr<MathOperator>& OutResult) const 
 {
     try {
-        MathOperator *ptr { nullptr };
         if (str == "-") {
-            ptr = new SubtractionOperator { };
+            OutResult.reset(new SubtractionOperator { });
+        } else {
+            OutResult.reset(nullptr);
         }
-        OutResult.reset(ptr);
     } catch (const std::bad_alloc&) {
         throw;
     }
