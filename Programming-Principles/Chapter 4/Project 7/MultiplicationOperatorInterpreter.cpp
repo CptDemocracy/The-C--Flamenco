@@ -13,11 +13,11 @@ void MultiplicationOperatorInterpreter::InterpretMathOperator(
     std::unique_ptr<MathOperator>& OutResult) const 
 {
     try {
-        MathOperator *ptr { nullptr };
         if (str == "*") {
-            ptr = new MultiplicationOperator { };
+            OutResult.reset(new MultiplicationOperator { });
+        } else {
+            OutResult.reset(nullptr);
         }
-        OutResult.reset(ptr);
     } catch (const std::bad_alloc&) {
         throw;
     }
